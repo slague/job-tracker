@@ -1,1 +1,7 @@
 <h1>Category is <%=@category.title%> </h1>
+
+
+<h3>Jobs in <%=@category.title%></h3>
+<% @jobs.where(category_id: @category.id).each do |job| %>
+  <li><%= job.title  %></li>
+  <% end  %>
