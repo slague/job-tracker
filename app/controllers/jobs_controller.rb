@@ -13,6 +13,7 @@ class JobsController < ApplicationController
 
   def create
     @job = @company.jobs.new(job_params.merge(category: @category))
+    #how to create a new category when you create a job?
     if @job.save
       flash[:success] = "You created #{@job.title} at #{@company.name}"
       redirect_to company_job_path(@company, @job)
@@ -54,7 +55,7 @@ class JobsController < ApplicationController
   end
 
   def set_category
-    @category = Category.find(params[:job][:category_id])
+    @category = Category.find_or_create_by(params[:job][:category_id])
   end
 
 
